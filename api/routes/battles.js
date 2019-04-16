@@ -9,8 +9,7 @@ router.get('/', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     const battle = {
-        productId: req.body.productId,
-        quantity: req.body.quantity
+        nameame: req.body.name
     };
     res.status(201).json({
         message: 'Battle was created',

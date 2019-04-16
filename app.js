@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const characterRoutes = require("./api/routes/characters");
 const battleRoutes = require("./api/routes/battles");
 
+const port = 5432;
+
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -36,6 +38,10 @@ app.use((error, req, res, next) => {
       message: error.message
     }
   });
+});
+
+app.listen(port, () => {
+  console.log('App running on port ' + port);
 });
 
 module.exports = app;

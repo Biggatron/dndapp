@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { query } = require('../../db/db');
 
 router.get('/', (req, res, next) => {
     res.status(200).json({
@@ -10,13 +11,26 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
     const character = {
         name: req.body.name,
-        price: req.body.price
+        maxhp: req.body.maxhp
     };
+    const results = createCharacter(character.name, character.maxhp, res);
+    console.log("hey gey " + results);
+});
+
+async function createCharacter(name, maxhp, res) {
+    const result = await query(
+        `INSERT INTO characters (name, maxhp) VALUES ($1, $2) RETURNING *`,
+        [name, maxhp]
+    );
+    console.log(result.rows[0]);
     res.status(201).json({
         message: 'Handling POST requests to /characters',
-        createdCharacter: character
+        name: result.rows[0].name,
+        maxhp: result.maxhp,
+        characterId: result.id
     });
-});
+    return result;
+};
 
 router.get('/:characterId', (req, res, next) => {
     const id = req.params.characterId;

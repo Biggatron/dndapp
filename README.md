@@ -7,3 +7,4 @@ npm packages:
     morgan
     nodemon
     body-parser
+    pg
