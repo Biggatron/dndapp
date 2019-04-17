@@ -24,7 +24,17 @@ async function main() {
     console.error('Villa við að búa til töflur:', e.message);
     return;
   }
+  
+  try {
+    const insert = await readFileAsync('./db/insert.sql');
+    await query(insert.toString('utf8'));
+    console.info('Gögnum bætt við');
+  } catch (e) {
+    console.error('Villa við að bæta gögnum við:', e.message);
+  }
+
 }
+
 
 main().catch((err) => {
     console.error(err);

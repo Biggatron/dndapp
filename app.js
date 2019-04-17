@@ -3,8 +3,8 @@ const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 
-const characterRoutes = require("./api/routes/characters");
-const battleRoutes = require("./api/routes/battles");
+const characterRoutes = require("./api/characters");
+const battleRoutes = require("./api/battles");
 
 const port = 5432;
 

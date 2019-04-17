@@ -1,7 +1,7 @@
 const xss = require('xss');
 const express = require('express');
 const router = express.Router();
-const { query } = require('../../db/db');
+const { query } = require('../db/db');
 
 router.post('/', (req, res, next) => { createCharacter(req, res) });
 router.get('/', (req, res, next) => { getCharacters(req, res) });
@@ -20,8 +20,8 @@ async function createCharacter(req, res) {
         maxhp: xss(req.body.maxhp)
     };
     const result = await query(
-        `INSERT INTO characters (name, maxhp) VALUES ($1, $2) RETURNING *`,
-        [character.name, character.maxhp]
+        `INSERT INTO characters (name, maxhp, temp) VALUES ($1, $2, $3) RETURNING *`,
+        [character.name, character.maxhp, false]
     );
     if (result.rows.length === 0) {
         res.status(500).json({
