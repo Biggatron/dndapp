@@ -1,3 +1,7 @@
+insert into users (username, password) values ('sturla', sturla);
+insert into users (username, password) values ('birgir', birgir);
+insert into users (username, password) values ('mikael', mikael);
+
 insert into characters (name, temp, maxhp) values ('Biggi', false, 100);
 insert into characters (name, temp, maxhp) values ('Jón', false, 10);
 insert into characters (name, temp, maxhp) values ('Mikki', false, 10);

@@ -17,11 +17,12 @@ router.delete('/:characterId', (req, res, next) => { deleteCharacter(req, res) }
 async function createCharacter(req, res) {
     const character = {
         name: xss(req.body.name),
-        maxhp: xss(req.body.maxhp)
+        maxhp: xss(req.body.maxhp),
+        currenthp: xss(req.body.currenthp)
     };
     const result = await query(
-        `INSERT INTO characters (name, maxhp, temp) VALUES ($1, $2, $3) RETURNING *`,
-        [character.name, character.maxhp, false]
+        `INSERT INTO characters (name, maxhp, currenthp, temp) VALUES ($1, $2, $3, $4) RETURNING *`,
+        [character.name, character.maxhp, character.currenthp, false]
     );
     if (result.rows.length === 0) {
         res.status(500).json({
@@ -32,6 +33,7 @@ async function createCharacter(req, res) {
             message: 'Character was created',
             name: result.rows[0].name,
             maxhp: result.rows[0].maxhp,
+            currenthp: result.rows[0].currenthp,
             characterId: result.rows[0].characterid
         });
     };

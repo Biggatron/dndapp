@@ -1,20 +1,21 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const morgan = require("morgan");
-const bodyParser = require("body-parser");
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
-const characterRoutes = require("./api/characters");
-const battleRoutes = require("./api/battles");
+const characterRoutes = require('./api/characters');
+const battleRoutes = require('./api/battles');
+const userRoutes = require('./api/users');
 
 const port = 5432;
 
-app.use(morgan("dev"));
+app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "*");
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', '*');
   if (req.method === 'OPTIONS') {
       res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
       return res.status(200).json({});
@@ -22,11 +23,13 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/characters", characterRoutes);
-app.use("/battles", battleRoutes);
+app.use('/characters', characterRoutes);
+app.use('/battles', battleRoutes);
+app.use('/users', userRoutes);
+
 
 app.use((req, res, next) => {
-  const error = new Error("Not found");
+  const error = new Error('Not found');
   error.status = 404;
   next(error);
 });
