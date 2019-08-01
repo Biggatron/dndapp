@@ -15,3 +15,11 @@ CREATE TABLE battleentries (
     battleid integer NOT NULL REFERENCES battles(battleid) ON DELETE CASCADE,
     UNIQUE(characterid, battleid)
 );
+
+CREATE TABLE users (
+    email varchar(64) primary key,
+    hash varchar(128) NOT NULL,
+    salt varchar(64) NOT NULL,
+    username varchar(64),
+    id varchar(64)
+);

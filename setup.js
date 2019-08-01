@@ -13,6 +13,7 @@ async function main() {
   await query('DROP TABLE IF EXISTS characters CASCADE');
   await query('DROP TABLE IF EXISTS battles CASCADE');
   await query('DROP TABLE IF EXISTS battleentries CASCADE');
+  await query('DROP TABLE IF EXISTS users CASCADE');
   console.info('Töflum eytt');
 
   // búa til töflur

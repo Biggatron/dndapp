@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 
 const characterRoutes = require("./api/characters");
 const battleRoutes = require("./api/battles");
+const userRoutes = require("./api/users");
+
 
 const port = 5432;
 
@@ -24,6 +26,8 @@ app.use((req, res, next) => {
 
 app.use("/characters", characterRoutes);
 app.use("/battles", battleRoutes);
+app.use("/users", userRoutes);
+
 
 app.use((req, res, next) => {
   const error = new Error("Not found");
